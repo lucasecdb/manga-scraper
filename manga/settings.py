@@ -2,7 +2,7 @@
 
 import os
 
-# Scrapy settings for mangapanda project
+# Scrapy settings for manga project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -11,14 +11,14 @@ import os
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'mangapanda'
+BOT_NAME = 'manga'
 
-SPIDER_MODULES = ['mangapanda.spiders']
-NEWSPIDER_MODULE = 'mangapanda.spiders'
+SPIDER_MODULES = ['manga.spiders']
+NEWSPIDER_MODULE = 'manga.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'mangapanda (+http://www.yourdomain.com)'
+#USER_AGENT = 'manga (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -69,7 +69,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'mangapanda.pipelines.MangaImagesPipeline': 1
+    'manga.pipelines.MangaImagesPipeline': 1
 }
 
 IMAGES_STORE = os.path.join(os.getcwd(), 'mangas')
