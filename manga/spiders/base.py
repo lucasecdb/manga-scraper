@@ -2,7 +2,9 @@ import scrapy
 import scrapy_splash
 
 
-class BaseSpider(scrapy.Spider):
+class MangaPandaBaseSpider(scrapy.Spider):
+    allowed_domains = ['mangapanda.org', 'cdn.mgid.com']
+
     def parse(self, response):
         def get_chapter_nums(a):
             n = []

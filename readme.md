@@ -1,6 +1,11 @@
-# MangaPanda Scraper
+# Manga Scraper
 
-Scraper for the MangaPanda [website](https://mangapanda.org/).
+Manga scraper.
+
+Supported websites:
+
+* [MangaPanda](https://mangapanda.org/)
+* [MangaFox](https://manga-fox.com/)
 
 ## Installation
 
