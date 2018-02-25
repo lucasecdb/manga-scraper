@@ -5,7 +5,7 @@ Manga scraper.
 Supported websites:
 
 * [MangaPanda](https://mangapanda.org/)
-* [MangaFox](https://manga-fox.com/)
+* [MangaHere](http://www.mangahere.cc/)
 
 ## Installation
 
