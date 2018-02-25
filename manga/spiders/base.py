@@ -21,9 +21,11 @@ class MangaPandaBaseSpider(scrapy.Spider):
             '//li[contains(@class, "list-group-item")]/a/@href'
         ).extract()
 
-        chapter_numbers = get_chapter_nums(response.xpath(
-            '//li[contains(@class, "list-group-item")]//*[contains(@class, "_3D1SJ")]/text()'
-        ).extract())
+        chapter_numbers = get_chapter_nums(
+            response.xpath(
+                '//li[contains(@class, "list-group-item")]//*[contains(@class, "_3D1SJ")]/text()'
+            ).extract()
+        )
 
         for i in range(len(links)):
             link = links[i]
@@ -43,3 +45,40 @@ class MangaPandaBaseSpider(scrapy.Spider):
             'image_urls': image_links,
             'chapter': response.meta['chapter']
         }
+
+
+class MangaHereBaseSpider(scrapy.Spider):
+    allowed_domains = ['mangahere.cc']
+
+    def parse(self, response):
+        links = response.xpath(
+            '//*[@class="manga_detail"]/*[@class="detail_list"]/ul/li//a/@href').extract()
+
+        chapters = response.xpath(
+            '//*[@class="manga_detail"]/*[@class="detail_list"]/ul/li//a/text()'
+        ).extract()
+
+        for i in range(len(links)):
+            link = 'http:' + links[i]
+            chapter = chapters[i].strip()
+
+            yield scrapy.Request(link, meta={'chapter': chapter}, callback=self.parse_chapter_page)
+
+    def parse_chapter_page(self, response):
+        image_link = response.xpath(
+            '//*[@id="viewer"]/a/img[2]/@src').extract_first()
+
+        title = response.xpath(
+            '//*[@class="readpage_top"]/div[@class="title"]/span/text()').extract_first().strip()
+
+        next_page = 'http:' + \
+            response.xpath('//*[@id="viewer"]/a/@href').extract_first()
+
+        yield {
+            'image_urls': [image_link],
+            'image_names': [title],
+            'chapter': response.meta['chapter']
+        }
+
+        if next_page != 'javascript:void(0);':
+            yield scrapy.Request(next_page, meta=response.meta, callback=self.parse_chapter_page)
