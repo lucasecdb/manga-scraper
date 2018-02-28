@@ -14,7 +14,7 @@ class MangaImagesPipeline(ImagesPipeline):
             name = image_names[i]
 
             yield scrapy.Request(url, meta={
-                'folder': info.spider.name,
+                'folder': info.spider.folder_name,
                 'chapter': item['chapter'],
                 'name': name
             })
