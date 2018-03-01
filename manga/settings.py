@@ -69,7 +69,8 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'manga.pipelines.MangaImagesPipeline': 1
+    'manga.pipelines.MangaImagesPipeline': 1,
+    'manga.pipelines.MobiConverterPipeline': 1
 }
 
 IMAGES_STORE = os.path.join(os.getcwd(), 'mangas')
@@ -97,3 +98,5 @@ HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
 SPLASH_URL = 'http://localhost:8050'
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+LOG_LEVEL = 'INFO'
