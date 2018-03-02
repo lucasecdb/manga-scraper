@@ -44,10 +44,22 @@ class MobiConverterPipeline(object):
 
         results_path = path.abspath(path.join(storage, folder_name))
 
-        for chapter_directory in listdir(results_path):
-            logger.info('Generating MOBI file for %s' % (chapter_directory))
+        chapter_directories = listdir(results_path)
 
-            chapter_title = folder_name + " " + chapter_directory
+        for i in range(len(chapter_directories)):
+            chapter_directory = chapter_directories[i]
+
+            logger.info('Generating MOBI file for %s (%d/%d)' %
+                        (chapter_directory, i + 1, len(chapter_directories)))
+
+            chapter_number = ""
+
+            if '.' in chapter_directory:
+                chapter_number = "##%05.1f" % float(chapter_directory)
+            else:
+                chapter_number = "#%03d" % int(chapter_directory)
+
+            chapter_title = folder_name + " " + chapter_number
 
             pipe = Popen('kcc-c2e -m -p KPW --whiteborders -f MOBI -u -r 2 -t "%s" "%s"' %
                          (chapter_title,

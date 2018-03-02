@@ -6,30 +6,20 @@ class MangaPandaBaseSpider(scrapy.Spider):
     allowed_domains = ['mangapanda.org', 'cdn.mgid.com']
 
     def parse(self, response):
-        def get_chapter_nums(a):
-            n = []
-
-            for i in range(len(a)):
-                if (i + 1) % 2 == 0:
-                    n[-1] += a[i]
-                else:
-                    n.append(a[i])
-
-            return n
-
         links = response.xpath(
             '//li[contains(@class, "list-group-item")]/a/@href'
         ).extract()
 
-        chapter_numbers = get_chapter_nums(
-            response.xpath(
-                '//li[contains(@class, "list-group-item")]//*[contains(@class, "_3D1SJ")]/text()'
-            ).extract()
-        )
+        chapters_raw = response.xpath(
+            '//li[contains(@class, "list-group-item")]//*[contains(@class, "_3D1SJ")]/text()'
+        ).extract()
+
+        chapter_numbers = [chapters_raw[i]
+                           for i in range(len(chapters_raw)) if i % 2 != 0]
 
         for i in range(len(links)):
             link = links[i]
-            chapter = 'Chapter %s' % chapter_numbers[i]
+            chapter = chapter_numbers[i]
 
             yield scrapy_splash.SplashRequest(link, self.parse_chapter_page, args={
                 'wait': 5
