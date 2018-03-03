@@ -72,7 +72,7 @@ class MobiConverterPipeline(object):
                 generated_file_name = path.join(
                     results_path, chapter_directory) + ".mobi"
                 rename(generated_file_name, path.join(results_path,
-                                                      folder_name + " " + chapter_directory) + ".mobi")
+                                                      chapter_title) + ".mobi")
 
                 logger.info('MOBI file generated successfully')
             except TimeoutExpired:
