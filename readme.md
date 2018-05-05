@@ -42,3 +42,9 @@ docker run -p 8050:8050 -p 5023:5023 scrapinghub/splash
 ```
 
 Now, just start scrapping 😀
+
+### Notes for kindle users and automatic MOBI conversion
+
+To be able to use the pipeline that automatically converts the scrapped images
+to the MOBI format (kindle format) you need to install the [Kindle Comic Converter](https://github.com/ciromattia/kcc),
+so you may want to do that before running the crawler.
