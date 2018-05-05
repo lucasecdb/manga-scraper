@@ -1,5 +1,11 @@
 # Manga Scraper
 
+## ❗️ Important ❗️
+
+This repository has been moved to [this repo](https://www.github.com/lucasecdb/mangahub)
+
+## Description
+
 Manga scraper.
 
 Supported websites:
